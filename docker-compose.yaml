@@ -16,6 +16,9 @@ services:
     networks:
       - server
       - memphis
+    depends_on:
+      - redis
+      - postgres
     container_name: server-messages
     restart: unless-stopped
     image: ghcr.io/hidromatologia-v2/messages:latest
@@ -23,13 +26,23 @@ services:
     networks:
       - server
       - memphis
+    depends_on:
+      - redis
+      - postgres
     container_name: server-alerts
     restart: unless-stopped
     image: ghcr.io/hidromatologia-v2/alerts:latest
+    environment:
+      - MEMPHIS_PRODUCER_PRODUCER=message-producer-2
   stations:
     networks:
       - server
       - memphis
+    depends_on:
+      - redis
+      - postgres
+      - alerts
+      - messages
     container_name: server-stations
     restart: unless-stopped
     image: ghcr.io/hidromatologia-v2/stations:latest
@@ -37,6 +50,11 @@ services:
     networks:
       - server
       - memphis
+    depends_on:
+      - redis
+      - postgres
+      - alerts
+      - messages
     container_name: server-users
     restart: unless-stopped
     image: ghcr.io/hidromatologia-v2/users:latest
@@ -49,7 +67,7 @@ services:
     container_name: server-nginx
     image: nginx:latest
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - '127.0.0.1:8080:80'
     restart: unless-stopped
