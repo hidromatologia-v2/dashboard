@@ -21,7 +21,7 @@
 <form on:submit|preventDefault={doLogin}>
 	<div class="flex flex-col justify-center items-center">
 		<h3 class="font-bold text-3xl m-5">Login</h3>
-		{#if errorMessage !== undefined}
+		{#if errorMessage !== undefined && errorMessage !== ''}
 			<div class="alert alert-error shadow-lg mb-5">
 				<div>
 					<svg

@@ -24,7 +24,7 @@
 <form on:submit|preventDefault={doRegister}>
 	<div class="flex flex-col justify-center items-center">
 		<h3 class="font-bold text-3xl m-5">Register</h3>
-		{#if errorMessage !== undefined || errorMessage === ''}
+		{#if errorMessage !== undefined && errorMessage !== ''}
 			<div class="alert alert-error shadow-lg mb-5">
 				<div>
 					<svg
