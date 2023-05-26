@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { register } from '$lib/api/register';
-	import { session } from '$lib/stores/session';
-	import { error } from '@sveltejs/kit';
+	import Error from '$lib/components/error/error.svelte';
 
 	let username: string;
 	let password: string;
 	let name: string;
 	let phone: string;
 	let email: string;
-	let errorMessage: string | undefined;
+	let errorMessage: string;
 	function doRegister(): void {
 		register(username, password, name, phone, email)
 			.then(() => {
@@ -24,43 +23,7 @@
 <form on:submit|preventDefault={doRegister}>
 	<div class="flex flex-col justify-center items-center">
 		<h3 class="font-bold text-3xl m-5">Register</h3>
-		{#if errorMessage !== undefined && errorMessage !== ''}
-			<div class="alert alert-error shadow-lg mb-5">
-				<div>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="stroke-current flex-shrink-0 h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-						/></svg
-					>
-					<span>{errorMessage}</span>
-				</div>
-			</div>
-		{:else}
-			<div class="alert alert-info shadow-lg mb-5">
-				<div>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						class="stroke-current flex-shrink-0 w-6 h-6"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-						/></svg
-					>
-					<span>Please register to access extra features</span>
-				</div>
-			</div>
-		{/if}
+		<Error bind:errorMessage/>
 		<input
 			bind:value={username}
 			type="text"

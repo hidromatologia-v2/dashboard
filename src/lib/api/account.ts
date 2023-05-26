@@ -56,7 +56,7 @@ export async function updateAccountDetails(session: string, form: UpdateRequest)
 	});
 	let response: ServerResponse;
 	switch (r.status) {
-		case 200: // Login succeed
+		case 200:
 			return;
 		case 400:
 			throw BadRequestError;
