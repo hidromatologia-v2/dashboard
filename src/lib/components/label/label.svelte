@@ -1,0 +1,1 @@
+<h3 class="text-xl mb-2"><slot/></h3>
