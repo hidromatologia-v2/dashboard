@@ -1,3 +1,7 @@
+<script>
+	import { session } from '$lib/stores/session';
+</script>
+
 <div class="dropdown">
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -23,5 +27,8 @@
 	>
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<li><a href="/">Homepage</a></li>
+		{#if $session}
+			<li><a href="/alerts">Alerts</a></li>
+		{/if}
 	</ul>
 </div>
