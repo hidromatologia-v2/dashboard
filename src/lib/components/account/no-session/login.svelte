@@ -37,6 +37,7 @@
 			required
 			class="input w-full input-bordered mb-5"
 		/>
+		<a class="link link-info mb-3" href="/reset/password">Reset password</a>
 		<button type="submit" class="btn btn-primary">Login</button>
 	</div>
 </form>
