@@ -12,7 +12,8 @@ export enum Condition {
 	Lt = '<',
 	Gt = '>',
 	Le = '<=',
-	Ge = '>='
+	Ge = '>=',
+	Invalid = 'INVALID'
 }
 
 export interface Alert {
