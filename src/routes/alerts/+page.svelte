@@ -29,7 +29,6 @@
 <div>
 	<div>
 		<Search bind:errorMessage bind:alerts bind:filter />
-		<!--TODO: Create station modal-->
 		<Create />
 	</div>
 	<Error bind:errorMessage />
@@ -37,6 +36,7 @@
 		{#if alerts}
 			{#each alerts.entries as entry, index}
 				<div>
+					<!--TODO: View card modal-->
 					{index}
 				</div>
 			{/each}
