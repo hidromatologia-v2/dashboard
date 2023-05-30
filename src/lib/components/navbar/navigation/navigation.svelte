@@ -28,7 +28,7 @@
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<li><a href="/">Homepage</a></li>
 		{#if $session}
-			<li><a href="/alerts">Alerts</a></li>
+			<li><a href="/alerts">My alerts</a></li>
 		{/if}
 	</ul>
 </div>
