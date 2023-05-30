@@ -26,7 +26,7 @@
 		class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 	>
 		<!-- svelte-ignore a11y-missing-attribute -->
-		<li><a href="/">Homepage</a></li>
+		<li><a href="/">Explore</a></li>
 		{#if $session}
 			<li><a href="/alerts">My alerts</a></li>
 		{/if}
