@@ -3,6 +3,8 @@
 	import Error from '$lib/components/error/error.svelte';
 	import { session } from '$lib/stores/session';
 
+	export let doRefreshPage: () => void;
+
 	let name: string;
 	let sensorUUID: string;
 	let condition: Condition;
@@ -20,7 +22,7 @@
 			enabled
 		})
 			.then(() => {
-				// TODO: Update current page
+				doRefreshPage()
 				errorMessage = '';
 			})
 			.catch((error: string) => (errorMessage = error));

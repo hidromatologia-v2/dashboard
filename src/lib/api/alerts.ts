@@ -56,9 +56,6 @@ export async function searchAlerts(
 }
 
 export async function createAlert(session: string, alert: Alert): Promise<void> {
-    console.log(alert);
-    console.log(session);
-    console.log(btoa(session))
 	const r: Response = await fetch(`${DefaultConfig.baseURL}/alert`, {
 		method: 'PUT',
 		headers: {
@@ -70,6 +67,54 @@ export async function createAlert(session: string, alert: Alert): Promise<void> 
 	let response: ServerResponse;
 	switch (r.status) {
 		case 201:
+			return;
+		case 400:
+			throw BadRequestError;
+		case 401:
+			throw UnauthorizedError;
+		case 500:
+			response = await r.json();
+			throw response.message;
+		default:
+			throw UnknownStatusCode;
+	}
+}
+
+export async function updateAlert(session: string, alert: Alert): Promise<void> {
+	const r: Response = await fetch(`${DefaultConfig.baseURL}/alert`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${btoa(session)}`
+		},
+		body: JSON.stringify(alert)
+	});
+	let response: ServerResponse;
+	switch (r.status) {
+		case 200:
+			return;
+		case 400:
+			throw BadRequestError;
+		case 401:
+			throw UnauthorizedError;
+		case 500:
+			response = await r.json();
+			throw response.message;
+		default:
+			throw UnknownStatusCode;
+	}
+}
+
+export async function deleteAlert(session: string, alert: Alert): Promise<void> {
+	const r: Response = await fetch(`${DefaultConfig.baseURL}/alert/${alert.uuid}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${btoa(session)}`
+		}
+	});
+	let response: ServerResponse;
+	switch (r.status) {
+		case 200:
 			return;
 		case 400:
 			throw BadRequestError;
